@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>full</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- http://rivetsjs.com/docs/reference/ -->
+<div id="mainContainer">
+	 <div id="screen">
+	 	<section rv-if="settings.sections.intro" id="section-home" data-sectionName="intro">
+	 		<p id="jouer-btn" data-sectionToShow="fighting">JOUER</p>
+	 	</section>
+	 	<section rv-if="settings.sections.fighting" id="section-fight" data-sectionName="fighting">
+
+	 		<!-- <p>enemies on top</p> -->
+	 		<ul id="enemies"> 
+		 		<li></li>
+	 			<li></li>
+	 			<li></li>
+	 			<li></li>
+	 		</ul>	
+
+	 		<!-- <p>small no man's land</p> -->
+			<div id="nomansland"> </div>
+	 		<!-- <p>onglets sorts, objets</p> -->
+	 		<ul id="tabTitles">
+ 				<li class="tab-title" data-tabname="skills"></li>
+ 				<li class="tab-title" data-tabname="magics"></li>
+ 				<li class="tab-title" data-tabname="items"></li>
+	 		</ul>
+
+	 		<!-- <p>fenetre pour l'onglet</p> -->
+ 			<div id="tabsContainer"> 
+				<div class="tab-content" id="skills" 
+				rv-if="settings.inventory.tabs.skills">
+					
+				</div>			
+
+				<div class="tab-content" id="magics"
+				rv-if="settings.inventory.tabs.magics">
+					
+				</div>
+
+				<div class="tab-content" id="items"
+				rv-if="settings.inventory.tabs.items">
+					
+				</div>
+	 		</div>	
+
+
+	 	</section>
+	 </div>
+</div>
+
+
+<!-- jquery -->
+<script	src="js/utils/jquery.js"></script>
+<script	src="js/rivets.js"></script>
+<script	src="js/main.js"></script>
+
+</body>
+</html>
