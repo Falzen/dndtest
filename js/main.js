@@ -64,7 +64,7 @@ var _equipments = [
 		'isEquipped': false
 	}
 ];
-
+var EQUIPMENTS = makeMapByAttrFromList(_equipments);
 var _skills = [
 	{
 		name: 'double fist',
@@ -140,56 +140,76 @@ class Player extends Character {
         super(data);
 
         // Add a new property
-        this.spells = spellsByLevel.get(data.level);
+        this.spells = null;
     }
 }
 
-var Object_Entity = function() {
-	let name = data.name;
-	let type = data.type;//Equipment, UsableItem, Weapon, Skill, Spell
-	let description = data.description;
-	let icon = data.icon;
-	let isUseOnTouch = data.isUseOnTouch;
-	this.doEffect = function (effectData) {}
+
+class Object_Entity {
+    constructor(data) {
+        this.name = data.name;
+		this.type = data.type;//Equipment, UsableItem, Weapon, Skill, Spell
+		this.description = data.description;
+		this.icon = data.icon;
+		this.isUseOnTouch = data.isUseOnTouch;
+	}
+
+    doEffect(effectData) {
+        return `${this.name} used ${effectData}.`;
+    }
+	
 }
 
-var Item_Entity = function(data) {
-  	Object_Entity.call(this, data);
-	let cost = data.cost;
-	let resell = data.resell;
-	let quantity = data.quantity;
+class Item_Entity extends Object_Entity {
+    constructor(data) {
+	    super(data);
+		this.cost = data.cost;
+		this.resell = data.resell;
+		this.quantity = data.quantity;
+	}
 }
 
-var Equipment_Entity = function(data) {
-  	Item_Entity.call(this, data);
-	let isEquipped = data.isEquipped;
+class Equipment_Entity extends Item_Entity {
+    constructor(data) {
+	    super(data);
+    	this.isEquipped = data.isEquipped;
+    }
 }
 
-var UsableItem_Entity = function(data) {
-  	Item_Entity.call(this, data);
-	let quantity = data.quantity;
+class UsableItem_Entity extends Item_Entity {
+    constructor(data) {
+	    super(data);
+	    this.quantity = data.quantity
+	}
 }
 
-var Weapon = function(data) {
-	Equipment_Entity.call(this, data);
-	let hitChance = data.hitChance;
-	let damage = data.damage;
-	let defense = data.defense;
-	let dexterity = data.dexterity;
+
+class Weapon_Entity extends Equipment_Entity {
+    constructor(data) {
+	    super(data);
+		this.hitChance = data.hitChance;
+		this.damage = data.damage;
+		this.defense = data.defense;
+		this.dexterity = data.dexterity;
+	}
 }
 
-var Skill = function(data) {
-  	Object_Entity.call(this, data);
-  	let isAOE = data.isAOE;
-  	let hasCooldown = data.hasCooldown;
-	let cooldown = data.cooldown;
+class Skill_Entity extends Object_Entity {
+    constructor(data) {
+	    super(data);
+  		this.isAOE = data.isAOE;
+  		this.hasCooldown = data.hasCooldown;
+		this.cooldown = data.cooldown;
+	}
 }
 
-var Spell = function(data) {
-  	Object_Entity.call(this, data);
-  	let isAOE = data.isAOE;
-  	let hasCooldown = data.hasCooldown;
-	let cooldown = data.cooldown;
+class Spell_Entity extends Object_Entity {
+    constructor(data) {
+	    super(data);
+  		this.isAOE = data.isAOE;
+  		this.hasCooldown = data.hasCooldown;
+		this.cooldown = data.cooldown;
+	}
 }
 
 /* = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = - = */
@@ -224,12 +244,6 @@ var settings = {
 	}
 };
 
-var equipmentList = [];
-const equipmentsByName = makeMapByAttrFromList(equipmentList, 'name');
-
-var spellsList = [];
-const spellsByLevel = makeMapByAttrFromList(spellsList, 'level');
-const spellsByName = makeMapByAttrFromList(spellsList, 'name');
 
 const startingStats = {
 	'name': 'name_test',
@@ -243,9 +257,9 @@ const startingStats = {
 	'equipment': {
 		head: '',
 		body: '',
-		legs: equipmentsByName.get('boots'),
-		leftHand: equipmentsByName.get('shield'),
-		rightHand: equipmentsByName.get('sword')
+		legs: '',
+		leftHand: '',
+		rightHand: ''
 	}
 }
 
@@ -283,7 +297,7 @@ var player = null;
 
 
 function init() {
-	rivets.bind($('#mainContainer'), {settings: settings, spellsList: spellsList});
+	rivets.bind($('#mainContainer'), {settings: settings});
 	player = new Player(startingStats);
 	console.log(player);
 	setNewSection('intro');
