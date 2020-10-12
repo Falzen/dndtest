@@ -10,48 +10,71 @@
 <!-- http://rivetsjs.com/docs/reference/ -->
 <div id="mainContainer">
 	 <div id="screen">
-	 	<section rv-if="settings.sections.intro" id="section-home" data-sectionName="intro">
-	 		<p id="jouer-btn" data-sectionToShow="fighting">JOUER</p>
+	 	<section rv-if="settings.sections.intro" id="section-intro" data-sectionName="intro">
+	 		<p id="jouer-btn" rv-on-click="settings.switchSection" data-targetname="town">JOUER</p>
 	 	</section>
-	 	<section rv-if="settings.sections.fighting" id="section-fight" data-sectionName="fighting">
 
-	 		<!-- <p>enemies on top</p> -->
-	 		<ul id="enemies"> 
-		 		<li></li>
-	 			<li></li>
-	 			<li></li>
-	 			<li></li>
-	 		</ul>	
+	 	<section rv-if="settings.sections.fighting" class="section-container" id="section-fight" data-sectionName="fighting">
+	 			<p class="temp">fighting</p>
+	 		<div class="section-content">
+			</div>
+	 	</section> <!-- end #section-fight -->
 
-	 		<!-- <p>small no man's land</p> -->
-			<div id="nomansland"> </div>
-	 		<!-- <p>onglets sorts, objets</p> -->
-	 		<ul id="tabTitles">
- 				<li class="tab-title" data-tabname="skills"></li>
- 				<li class="tab-title" data-tabname="magics"></li>
- 				<li class="tab-title" data-tabname="items"></li>
-	 		</ul>
+	 	<section rv-if="settings.sections.town" class="section-container" id="section-town" 
+	 		data-sectionName="town">
+			<p class="temp">town</p>
+			<div class="section-content">
+				<div id="town-map">
+	 				<ul>
+	 					<li>Taverne</li>
+	 					<li rv-on-click="settings.switchSection" data-targetname="shop">Magasin</li>
+	 					<li>Donjon</li>
+	 				</ul>
+	 			</div>
+	 			<div id="backpack">
+	 				<div id="character-equipment">
+	 					<ul id="equipment-body-list" class="equipment-list">
+	 						<li class="head">Rien</li>
+	 						<li class="armor">Cuir souple</li>
+	 						<li class="legs">Cuir souple</li>
+	 					</ul>
+	 					<ul id="equipment-hands-list" class="equipment-list">
+	 						<li class="gloves">Cuir souple</li>
+	 						<li class="left-hand">Bouclier</li>
+	 						<li class="right-hand">Epée</li>
+	 					</ul>
+	 				</div>
+	 				<div id="inventory">
+	 					<ul class="tabs-titles">
+	 						<li rv-on-click="settings.inventory.switchTab" data-targetname="equips" class="inventory-tab-title is-selected">equips</li>
+	 						<li rv-on-click="settings.inventory.switchTab" data-targetname="items" class="inventory-tab-title">items</li>
+	 						<li rv-on-click="settings.inventory.switchTab" data-targetname="skills" class="inventory-tab-title">skills</li>
+	 					</ul>
+	 					<div class="tabs-container">
+		 					<div rv-if="settings.inventory.tabs.equips" id="equips">
+		 						EQUIPS Lorem ipsum, dolor, sit amet consectetur adipisicing elit. Similique, incidunt natus odit fugiat sequi autem adipisci tempore. Laborum labore illum facere obcaecati harum iure nostrum aperiam deleniti quasi tempora, laudantium voluptatibus similique maxime ad dignissimos voluptate quos doloremque veritatis veniam. Ratione quasi reiciendis cum laudantium nam eaque, molestias, voluptatem quisquam!
+		 					</div>
 
-	 		<!-- <p>fenetre pour l'onglet</p> -->
- 			<div id="tabsContainer"> 
-				<div class="tab-content" id="skills" 
-				rv-if="settings.inventory.tabs.skills">
-					
-				</div>			
+		 					<div rv-if="settings.inventory.tabs.items" id="items" >
+		 						ITEMS Lorem ipsum, dolor sit, amet consectetur adipisicing elit. Deserunt sint tempore, pariatur dolor dicta provident aut perspiciatis ut quasi reprehenderit nobis voluptatum labore temporibus, deleniti, quisquam omnis! Fugiat est, laborum alias animi debitis repellendus, blanditiis assumenda temporibus id. Deleniti, omnis. Soluta est, enim corporis alias accusantium dolor voluptate blanditiis minus.
+		 					</div>
 
-				<div class="tab-content" id="magics"
-				rv-if="settings.inventory.tabs.magics">
-					
-				</div>
+		 					<div rv-if="settings.inventory.tabs.skills" id="skills" >
+		 						SKILLS Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa alias rerum tempore obcaecati dolor mollitia ullam cumque enim atque quos eaque, rem iure natus vero velit laboriosam sunt placeat, magni non eligendi provident soluta unde? Modi quas ipsam doloribus. Libero, nam voluptate doloremque tempora ipsa fugiat laborum, vel fugit illum.
+		 					</div>
+	 					</div>
+	 				</div> <!-- end #inventory -->
+	 			</div> <!-- end #backpack -->
+			</div>
+		</section> <!-- end #section-town -->
 
-				<div class="tab-content" id="items"
-				rv-if="settings.inventory.tabs.items">
-					
-				</div>
-	 		</div>	
-
-
-	 	</section>
+	 	<section rv-if="settings.sections.shop" class="section-container" id="section-shop" data-sectionName="shop">
+			<div class="section-content">
+				<p class="temp">shop</p>
+				<p rv-on-click="settings.switchSection" data-targetname="town">Ville</p>
+				
+			</div>
+		</section> <!-- end #section-town -->
 	 </div>
 </div>
 
@@ -59,7 +82,11 @@
 <!-- jquery -->
 <script	src="js/utils/jquery.js"></script>
 <script	src="js/rivets.js"></script>
+<script	src="js/utils.js"></script>
+<script	src="js/staticdata.js"></script>
+<script	src="js/datamodel.js"></script>
 <script	src="js/main.js"></script>
+<script	src="js/eventListeners.js"></script>
 
 </body>
 </html>
