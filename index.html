@@ -9,6 +9,7 @@
 
 <!-- http://rivetsjs.com/docs/reference/ -->
 <div id="mainContainer">
+	<!-- {settings}, {player} -->
 	 <div id="screen">
 	 	<section rv-if="settings.sections.intro" id="section-intro" data-sectionName="intro">
 	 		<p id="jouer-btn" rv-on-click="settings.switchSection" data-targetname="town">JOUER</p>
@@ -32,28 +33,80 @@
 	 				</ul>
 	 			</div>
 	 			<div id="backpack">
+	 				<div id="character-statistics">
+	 					<table>
+		 					<tr>
+								<td>name</td><td>{player.name}</td>
+							</tr>
+		 					<tr>
+								<td>level</td><td>{player.level}</td>
+							</tr>
+							<tr>
+								<td>ac</td><td>{player.ac}</td>
+							</tr>
+						</table>
+	 					<table>
+		 					<tr>
+								<td>str</td><td>{player.str}</td>
+							</tr>
+							<tr>
+								<td>const</td><td>{player.const}</td>
+							</tr>
+		 					<tr>
+								<td>intel</td><td>{player.intel}</td>
+							</tr>
+						</table>
+	 					<table>
+							<tr>
+								<td>dex</td><td>{player.dex}</td>
+							</tr>
+		 					<tr>
+								<td>luck</td><td>{player.luck}</td>
+							</tr>
+						</table>
+	 				</div>
 	 				<div id="character-equipment">
-	 					<ul id="equipment-body-list" class="equipment-list">
-	 						<li class="head">Rien</li>
-	 						<li class="armor">Cuir souple</li>
-	 						<li class="legs">Cuir souple</li>
-	 					</ul>
-	 					<ul id="equipment-hands-list" class="equipment-list">
-	 						<li class="gloves">Cuir souple</li>
-	 						<li class="left-hand">Bouclier</li>
-	 						<li class="right-hand">Epée</li>
+	 					<ul id="" class="equipment-list">
+							<li rv-each-eq="player.equipped" rv-class="eq.label" rv-thevalue="eq.value">
+		 						{eq.value}
+		 					</li>
 	 					</ul>
 	 				</div>
 	 				<div id="inventory">
 	 					<ul class="tabs-titles">
-	 						<li rv-on-click="settings.inventory.switchTab" data-targetname="equips" class="inventory-tab-title is-selected">equips</li>
-	 						<li rv-on-click="settings.inventory.switchTab" data-targetname="items" class="inventory-tab-title">items</li>
-	 						<li rv-on-click="settings.inventory.switchTab" data-targetname="skills" class="inventory-tab-title">skills</li>
+	 						<li 
+	 							rv-on-click="settings.inventory.switchTab" 
+	 							data-targetname="equips" 
+	 							class="inventory-tab-title is-selected">
+ 								equips
+							</li>
+	 						<li 
+	 							rv-on-click="settings.inventory.switchTab" 
+	 							data-targetname="items" 
+	 							class="inventory-tab-title">
+ 								items
+							</li>
+	 						<li 
+	 							rv-on-click="settings.inventory.switchTab" 
+	 							data-targetname="skills" 
+	 							class="inventory-tab-title">
+ 								skills
+							</li>
 	 					</ul>
-	 					<div class="tabs-container">
+	 					<div class="tabs-container"> 
 		 					<div rv-if="settings.inventory.tabs.equips" id="equips">
-		 						EQUIPS Lorem ipsum, dolor, sit amet consectetur adipisicing elit. Similique, incidunt natus odit fugiat sequi autem adipisci tempore. Laborum labore illum facere obcaecati harum iure nostrum aperiam deleniti quasi tempora, laudantium voluptatibus similique maxime ad dignissimos voluptate quos doloremque veritatis veniam. Ratione quasi reiciendis cum laudantium nam eaque, molestias, voluptatem quisquam!
-		 					</div>
+		 						EQUIPS 
+		 						<ul class="equipment-list">
+								  <li rv-each-eq="player.backpack.equips">
+								    <p 
+								    	rv-class="eq.type" 
+							    		rv-class-isequipped="eq.isEquipped" 
+							    		rv-on-click="eq.toggleEquipmentStatus">
+							    		{ eq.name }
+						    		</p>
+								  </li>
+								<ul>
+	 						</div>
 
 		 					<div rv-if="settings.inventory.tabs.items" id="items" >
 		 						ITEMS Lorem ipsum, dolor sit, amet consectetur adipisicing elit. Deserunt sint tempore, pariatur dolor dicta provident aut perspiciatis ut quasi reprehenderit nobis voluptatum labore temporibus, deleniti, quisquam omnis! Fugiat est, laborum alias animi debitis repellendus, blanditiis assumenda temporibus id. Deleniti, omnis. Soluta est, enim corporis alias accusantium dolor voluptate blanditiis minus.

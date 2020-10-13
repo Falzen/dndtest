@@ -11,6 +11,7 @@ class Character {
         this.luck = data.luck;
 
         this.equipped = data.equipped;
+        this.backpack = data.backpack;
 
     }
 
@@ -35,7 +36,7 @@ class Player extends Character {
 class Object_Entity {
     constructor(data) {
         this.name = data.name;
-		this.type = data.type;//Equipment, UsableItem, Weapon, Skill, Spell
+		this.type = data.type;//weapon, shield, helmet, armor, boots, gloves, skill, item
 		this.description = data.description;
 		this.icon = data.icon;
 		this.isUseOnTouch = data.isUseOnTouch;
@@ -61,6 +62,15 @@ class Equipment_Entity extends Item_Entity {
 	    super(data);
 		this.quantity = 1;
     	this.isEquipped = data.isEquipped;
+    }
+
+    toggleEquipmentStatus(ev, model) {
+        console.log('toggleEquipmentStatus');
+        console.log('model : ', model);
+        console.log('model.eq.isEquipped : ', model.eq.isEquipped);
+        model.eq.isEquipped = !model.eq.isEquipped;
+        makeEquippedList();
+        return;
     }
 }
 
@@ -91,11 +101,11 @@ class Skill_Entity extends Object_Entity {
 	}
 }
 
-class Spell_Entity extends Object_Entity {
-    constructor(data) {
-	    super(data);
-  		this.isAOE = data.isAOE;
-  		this.hasCooldown = data.hasCooldown;
-		this.cooldown = data.cooldown;
-	}
-}
+// class Spell_Entity extends Object_Entity {
+//     constructor(data) {
+// 	    super(data);
+//   		this.isAOE = data.isAOE;
+//   		this.hasCooldown = data.hasCooldown;
+// 		this.cooldown = data.cooldown;
+// 	}
+// }
