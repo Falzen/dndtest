@@ -24,8 +24,8 @@ var _weapons = [
 		resell: 16,
 		hitChance: 4, // +4 to roll
 		damage: '2d6',
-		defense: 1, // minus to damage recieved
-		dexterity: 0, // bonus to AC
+		const: 1, // minus to damage recieved
+		dex: 0, // bonus to AC
 		isEquipped: false
 	}
 ]
@@ -42,8 +42,8 @@ var _equipments = [
 		resell: 6,
 		hitChance: 0, // +4 to roll
 		damage: '1d4',
-		defense: 3, // minus to damage recieved
-		dexterity: 3, // bonus to AC
+		const: 3, // minus to damage recieved
+		ac: 3, // bonus to AC
 		isEquipped: false
 	},
 	{
@@ -57,12 +57,14 @@ var _equipments = [
 		resell: 5,
 		hitChance: 0, // +4 to roll
 		damage: null,
-		defense: 0, // minus to damage recieved
-		dexterity: 1, // bonus to AC
+		const: 0, // minus to damage recieved
+		dex: 1, // bonus to AC
 		isEquipped: false
 	}
 ];
+console.log('_equipments : ', _equipments);
 var EQUIPMENTS = makeMapByAttrFromList(_equipments);
+console.log('EQUIPMENTS : ', EQUIPMENTS);
 
 var _skills = [
 	{

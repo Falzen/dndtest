@@ -62,15 +62,35 @@ class Equipment_Entity extends Item_Entity {
 	    super(data);
 		this.quantity = 1;
     	this.isEquipped = data.isEquipped;
+
+        this.hitChance = data.hitChance;
+        this.damage = data.damage;
+
+        this.ac = data.ac;
+        this.str = data.str;
+        this.const = data.const;
+        this.intel = data.intel;
+        this.dex = data.dex;
+        this.luck = data.luck;
     }
 
     toggleEquipmentStatus(ev, model) {
-        console.log('toggleEquipmentStatus');
-        console.log('model : ', model);
-        console.log('model.eq.isEquipped : ', model.eq.isEquipped);
-        model.eq.isEquipped = !model.eq.isEquipped;
+        if(model.eq.isEquipped) {
+            model.eq.isEquipped = false;
+        } else {
+            // unequip all similar type items
+            for(let i=0; i<player.backpack.equips.length; i++) {
+                let eq = player.backpack.equips[i];
+                if(eq.type == model.eq.type) {
+                    eq.isEquipped = false;
+                }
+            }
+            model.eq.isEquipped = !model.eq.isEquipped;
+        }
         makeEquippedList();
+        compilePlayerStats();
         return;
+
     }
 }
 
@@ -87,8 +107,8 @@ class Weapon_Entity extends Equipment_Entity {
 	    super(data);
 		this.hitChance = data.hitChance;
 		this.damage = data.damage;
-		this.defense = data.defense;
-		this.dexterity = data.dexterity;
+		this.def = data.def;
+		this.dex = data.dex;
 	}
 }
 
